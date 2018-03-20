@@ -3,9 +3,10 @@
  */
 package com.example.demo.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import lombok.Data;
 
@@ -14,7 +15,6 @@ import lombok.Data;
  *
  */
 @Data
-//@JacksonXmlRootElement(localName = "Person", namespace = "http://www.arun786.xsd")
 public class Person {
 
 	@JacksonXmlProperty(localName = "Name")
@@ -23,6 +23,8 @@ public class Person {
 	private String age;
 	@JacksonXmlProperty(localName = "Phone", namespace = "http://www.arun786.xsd")
 	private Phone phone;
+	@JacksonXmlProperty(localName = "address", namespace = "https://www.arun786.xsd")
+	private Addresses address;
 
 	@Data
 	@JsonPropertyOrder({ "areaCode", "phoneNumber" })
@@ -31,6 +33,22 @@ public class Person {
 		private String areaCode;
 		@JacksonXmlProperty(localName = "PhoneNumber")
 		private String phoneNumber;
+	}
+
+	@Data
+	public class Addresses {
+		@JacksonXmlProperty(localName = "addresses")
+		private List<Address> addresses;
+	}
+
+	@Data
+	public class Address {
+		@JacksonXmlProperty(localName = "Line1")
+		private String line1;
+		@JacksonXmlProperty(localName = "Street")
+		private String street;
+		@JacksonXmlProperty(localName = "State")
+		private String state;
 	}
 
 }
