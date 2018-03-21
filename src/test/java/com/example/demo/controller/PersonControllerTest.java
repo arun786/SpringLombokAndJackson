@@ -44,7 +44,7 @@ public class PersonControllerTest {
 
 		Person.Phone phone = person.new Phone();
 		phone.setAreaCode("480");
-		phone.setPhoneNumber("2326132");
+		phone.setPhoneNumber("2321632");
 		person.setPhone(phone);
 	}
 
@@ -53,5 +53,9 @@ public class PersonControllerTest {
 		when(iPersonService.getPersonDetails(person)).thenReturn(Arrays.asList(person));
 		ResponseEntity<List<Person>> persons = personController.getPersonDetails(person);
 		assertEquals(1, persons.getBody().size());
+		assertEquals("Arun", persons.getBody().get(0).getName());
+		assertEquals("15", persons.getBody().get(0).getAge());
+		assertEquals("480", persons.getBody().get(0).getPhone().getAreaCode());
+		assertEquals("2321632", persons.getBody().get(0).getPhone().getPhoneNumber());
 	}
 }
